@@ -3,11 +3,9 @@ VIQE client data representation and corresponding NGSI entities.
 """
 
 from enum import Enum
-from typing import List, Optional
-
-from pydantic import BaseModel, confloat, constr
-
 from fipy.ngsi.entity import BaseEntity, BoolAttr, FloatAttr, TextAttr
+from pydantic import BaseModel, confloat, constr
+from typing import List, Optional
 
 
 class InspectionType(str, Enum):
@@ -52,15 +50,6 @@ class ClientInspection(BaseModel):
     # TODO shouldn't the threshold be part of the report? If available,
     # then we could plot it as a horizontal line on the report chart as
     # an additional visual aid?
-
-
-# class ClientInspectionBatch(BaseModel):
-#     """A batch of inspection reports the VIQE client sends to the cloud
-#     after an inspection session where it carries out a series of checks
-#     on raw materials and tweezers dimensions."""
-
-#     reports: List[ClientInspection]
-
 
 
 class BaseInspectionEntity(BaseEntity):
