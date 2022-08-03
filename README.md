@@ -52,3 +52,18 @@ Measure global test coverage and generate an HTML report
 $ coverage run -m pytest -v tests
 $ coverage html
 ```
+
+Run the VIQE cloud service locally on port 8000
+
+```console
+$ poetry shell
+$ python -m viqe.main
+# ^ same as: uvicorn viqe.main:app --host 0.0.0.0 --port 8000
+```
+
+Build and run the Docker image
+
+```console
+$ docker build -t kitt4sme/viqe .
+$ docker run -p 8000:8000 kitt4sme/viqe
+```
