@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "viqe"
+version = "0.1.0"
+description = "Deep learning image processing by Rovimatica to inspect and evaluate the quality of manufacturing parts."
+authors = ["innovacion-rovi", "c0c0n3"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.73.0"
+fipy = {git = "https://github.com/c0c0n3/kitt4sme.fipy.git", tag = "0.5.0"}
+pydantic = "^1.9.0"
+uri = "^2.0.1"
+uvicorn = {extras = ["standard"], version = "^0.17.1"}
+
+[tool.poetry.dev-dependencies]
+coverage = "^6.3"
+pytest = "^6.2"
+requests = "^2.27"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
