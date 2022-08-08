@@ -1,13 +1,7 @@
-import json
-import requests
 from typing import List
 
 from viqe.ngsy import InspectionType
-from tests.util.fiware import TENANT
-
-
-def inspection_endpoint_url() -> str:
-    return f"http://localhost:8000/{TENANT}/inspection"
+import tests.util.viqe_client as viqe_client
 
 
 def client_inspection_batch() -> List[dict]:
@@ -55,16 +49,9 @@ def client_inspection_batch() -> List[dict]:
 
 
 def post_inspection_batch():
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    body = json.dumps(client_inspection_batch())
-    response = requests.post(
-        inspection_endpoint_url(),
-        headers=headers,
-        data=body
+    response = viqe_client.post_inspection_batch(
+        client_inspection_batch()
     )
-
     assert response.status_code == 200
 
 
