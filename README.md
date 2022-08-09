@@ -67,3 +67,64 @@ Build and run the Docker image
 $ docker build -t kitt4sme/viqe .
 $ docker run -p 8000:8000 kitt4sme/viqe
 ```
+
+
+### Live simulator
+
+We've whipped together a test bed to simulate a live environment similar
+to that of the KITT4SME cluster. In the `tests/sim` directory, you'll find
+a Docker compose file with
+
+* Quantum Leap with a CrateDB backend
+* Our VIQE service
+* KITT4SME Dazzler configured with dashboards to display VIQE's
+  inspection reports
+
+To start the show, run (Ctrl+C to stop)
+
+```console
+$ poetry shell
+$ python tests/sim
+```
+
+This will bring up the Docker compose environment (assuming you've
+got a Docker engine running already) and simulate the VIQE client
+sending an inspection report batch to the VIQE service. On receiving
+the batch, the VIQE service splits into two sets of NGSI entities.
+(Raw materials and tweezers inspection entities, have a look at the
+`viqe.ngsy` module for the data model details.) Then it stashes the
+two sets away in Quantum Leap. And here's what's actually going on
+under the bonnet:
+
+![Live simulator.][dia.sim]
+
+In fact, if you browse to the CrateDB Web UI at:
+
+- http://localhost:4200.
+
+you should be able to query both the raw materials and tweezers
+inspection entity tables to see how the VIQE client inspections
+produced by the simulator get transformed into NGSI entities and
+then saved to the DB. Now browse to the VIQE Dazzler dashboards
+at:
+
+- http://localhost:8080/dazzler/rovi/-/raw_materials/
+- http://localhost:8080/dazzler/rovi/-/tweezers/
+
+Each dashboard comes with an explanation of what it is and how it
+works. To plot the inspection data in the batch the simulator sent,
+choose a time interval spanning from ten hours ago to now, then hit
+the load button. (NGSI entities get a UTC-0 timestamp, so you've got
+to select a wide enough interval to cater for your time zone, otherwise
+the underlying query returns no data.)
+
+Notice that all those entities belong to a tenant named `rovi`. So
+you should be able to see Quantum Leap using a separate DB/schema for
+that tenant. Also the tenant's name is part of each Dazzler dashboard
+URL and is also shown on the dashboard. (KITT4SME relies on this arrangement
+to silo tenant data and enforce security policies.)
+
+
+
+
+[dia.sim]: ./viqe-sim.svg
