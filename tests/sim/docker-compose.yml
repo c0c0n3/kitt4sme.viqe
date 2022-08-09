@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+
+  crate:
+    image: crate:4.5.1
+    command: crate -Cauth.host_based.enabled=false
+      -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    ports:
+      - "4200:4200"
+      - "4300:4300"
+    networks:
+      - simtests
+
+  quantumleap:
+    image: orchestracities/quantumleap:0.8.3
+    depends_on:
+      - crate
+    networks:
+      - simtests
+    ports:
+      - "8668:8668"
+    environment:
+      - CRATE_HOST=crate
+      - USE_GEOCODING=False
+      - CACHE_QUERIES=False
+      - LOGLEVEL=DEBUG
+
+  dazzler:
+    image: ghcr.io/c0c0n3/kitt4sme.dazzler:0.3.0
+    # image: kitt4sme/dazzler
+    networks:
+      - simtests
+    ports:
+      - "8080:8000"
+    volumes:
+      - type: bind
+        source: ./dazzler-config.yaml
+        target: /etc/dazzler-config.yaml
+    environment:
+      - DAZZLER_CONFIG=/etc/dazzler-config.yaml
+
+  viqe:
+    build: ../../
+    image: kitt4sme/viqe
+    networks:
+      - simtests
+    ports:
+      - "8000:8000"
+    environment:
+      - QUANTUMLEAP_BASE_URL=http://quantumleap:8668
+
+networks:
+  simtests:
+    driver: bridge

@@ -1,0 +1,7 @@
+quantumleap_base_url: http://quantumleap:8668
+boards:
+  rovi:
+  - builder: dazzler.dash.board.viqe.raw_material_dash_builder
+    board_path: raw_materials
+  - builder: dazzler.dash.board.viqe.tweezers_dash_builder
+    board_path: tweezers

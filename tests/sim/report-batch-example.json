@@ -1,0 +1,41 @@
+[
+    {
+        "type": "raw_material",
+        "inspected_item_id": "steel-slab:1",
+        "inspection_result": true,
+        "inspection_result_normalized": 0.2
+    },
+    {
+        "type": "raw_material",
+        "inspected_item_id": "steel-slab:2",
+        "inspection_result": false,
+        "inspection_result_normalized": 1
+    },
+    {
+        "type": "raw_material",
+        "inspected_item_id": "steel-slab:3",
+        "inspection_result": true,
+        "inspection_result_normalized": 0
+    },
+    {
+        "type": "tweezers_measurement",
+        "spec": "spec:1",
+        "inspected_item_id": "tweezers:1",
+        "inspection_result": true,
+        "inspection_result_normalized": 0.2
+    },
+    {
+        "type": "tweezers_measurement",
+        "spec": "spec:1",
+        "inspected_item_id": "tweezers:2",
+        "inspection_result": false,
+        "inspection_result_normalized": 1
+    },
+    {
+        "type": "tweezers_measurement",
+        "spec": "spec:2",
+        "inspected_item_id": "tweezers:3",
+        "inspection_result": true,
+        "inspection_result_normalized": 0
+    }
+]
