@@ -113,8 +113,10 @@ at:
 
 Each dashboard comes with an explanation of what it is and how it
 works. To plot the inspection data in the batch the simulator sent,
-choose a time interval spanning from an hour ago to now, then hit
-the load button.
+choose a time interval spanning from ten hours ago to now, then hit
+the load button. (NGSI entities get a UTC-0 timestamp, so you've got
+to select a wide enough interval to cater for your time zone, otherwise
+the underlying query returns no data.)
 
 Notice that all those entities belong to a tenant named `rovi`. So
 you should be able to see Quantum Leap using a separate DB/schema for
